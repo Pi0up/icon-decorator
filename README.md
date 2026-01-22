@@ -48,8 +48,5 @@ The demo includes a "No Background" variant showing a badge with transparent bac
 - Badges are placed as decorative content (the demo uses `aria-hidden` on the internal container). If the badge conveys important information (unread count), expose it to assistive tech appropriately in your markup.
 
 ## License
-Add your license or keep private as needed.
+MIT License
 
----
-
-If you want, I can also add a short usage snippet demonstrating integration into buttons, lists, and dropdowns, or publish a small npm package scaffold. What would you like next?
