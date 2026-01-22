@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icon Decorator - Demo & Playground</title>
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      color: #333;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 60px;
+    }
+
+    .header h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .header p {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    /* Sections */
+    .section {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 30px;
+      color: #222;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 28px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 2px;
+    }
+
+    /* Variants Grid */
+    .variants-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .variant-card {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      border: 2px solid #e9ecef;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      min-height: 200px;
+    }
+
+    .variant-card:hover {
+      border-color: #667eea;
+      background: #f0f3ff;
+      transform: translateY(-4px);
+    }
+
+    .variant-card .preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 120px;
+    }
+
+    .variant-card .label {
+      font-size: 13px;
+      color: #666;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Playground */
+    .playground {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .playground-preview {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      border: 2px solid #e9ecef;
+    }
+
+    .playground-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-height: 600px;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .control-group label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #222;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .control-group input[type="range"] {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: #e9ecef;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .control-group input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+    }
+
+    .control-group input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+    }
+
+    .control-group input[type="text"],
+    .control-group input[type="color"],
+    .control-group select {
+      padding: 10px 12px;
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+    }
+
+    .control-group input[type="text"]:focus,
+    .control-group input[type="color"]:focus,
+    .control-group select:focus {
+      outline: none;
+      border-color: #667eea;
+      background: #f0f3ff;
+    }
+
+    .control-group input[type="color"] {
+      padding: 6px;
+      height: 44px;
+      cursor: pointer;
+    }
+
+    .value-display {
+      background: #f0f3ff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: 'Courier New', monospace;
+      color: #667eea;
+      font-weight: 600;
+    }
+
+    /* Position buttons */
+    .position-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .position-btn {
+      padding: 10px;
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .position-btn:hover {
+      border-color: #667eea;
+      background: #f0f3ff;
+    }
+
+    .position-btn.active {
+      border-color: #667eea;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    /* Preset colors */
+    .preset-colors {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .preset-btn {
+      padding: 8px;
+      border: 2px solid #e9ecef;
+      border-radius: 6px;
+      background: white;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .preset-btn:hover {
+      border-color: #667eea;
+      background: #f0f3ff;
+    }
+
+    .color-swatch {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    /* Icon/Decorator selector */
+    .selector-group {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 12px;
+      border: 2px solid #e9ecef;
+    }
+
+    .selector-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .icon-selector {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+
+    .icon-option {
+      padding: 8px;
+      border: 2px solid #e9ecef;
+      border-radius: 6px;
+      background: white;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      min-height: 40px;
+    }
+
+    .icon-option:hover {
+      border-color: #667eea;
+      background: #f0f3ff;
+    }
+
+    .icon-option.active {
+      border-color: #667eea;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    /* Use Cases */
+    .use-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .use-case-card {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 30px;
+      border-left: 4px solid #667eea;
+    }
+
+    .use-case-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #222;
+    }
+
+    .use-case-demo {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 80px;
+      gap: 10px;
+    }
+
+    .use-case-description {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* Icon Decorator default size for main examples */
+    icon-decorator {
+      --icon-size: 64px;
+    }
+
+    .playground-preview icon-decorator {
+      --icon-size: 120px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .playground {
+        grid-template-columns: 1fr;
+      }
+
+      .header h1 {
+        font-size: 36px;
+      }
+
+      .section {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>✨ Icon Decorator</h1>
+      <p>Beautiful decorated icons with customizable badges and notifications</p>
+    </div>
+
+    <!-- Variants Section -->
+    <div class="section">
+      <div class="section-title">Position Variants</div>
+      <div class="variants-grid">
+        <div class="variant-card">
+          <div class="preview">
+            <icon-decorator position="top-left" size-ratio="0.5" cutout-border="2px" offset="3px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">person</span>
+              <div slot="decorator" style="background: #ff3b30; width: 16px; height: 16px; border-radius: 50%;"></div>
+            </icon-decorator>
+          </div>
+          <div class="label">Top Left</div>
+        </div>
+
+        <div class="variant-card">
+          <div class="preview">
+            <icon-decorator position="top-right" size-ratio="0.5" cutout-border="2px" offset="3px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">person</span>
+              <div slot="decorator" style="background: #ff3b30; width: 16px; height: 16px; border-radius: 50%;"></div>
+            </icon-decorator>
+          </div>
+          <div class="label">Top Right</div>
+        </div>
+
+        <div class="variant-card">
+          <div class="preview">
+            <icon-decorator position="bottom-left" size-ratio="0.5" cutout-border="2px" offset="3px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">person</span>
+              <div slot="decorator" style="background: #ff3b30; width: 16px; height: 16px; border-radius: 50%;"></div>
+            </icon-decorator>
+          </div>
+          <div class="label">Bottom Left</div>
+        </div>
+
+        <div class="variant-card">
+          <div class="preview">
+            <icon-decorator position="bottom-right" size-ratio="0.5" cutout-border="2px" offset="3px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">person</span>
+              <div slot="decorator" style="background: #ff3b30; width: 16px; height: 16px; border-radius: 50%;"></div>
+            </icon-decorator>
+          </div>
+          <div class="label">Bottom Right</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Size Variants -->
+    <div class="section">
+      <div class="section-title">Size Variants</div>
+      <div class="variants-grid">
+        <div class="variant-card">
+          <div class="preview">
+            <icon-decorator position="bottom-right" size-ratio="0.3" cutout-border="1px" offset="2px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #667eea; font-size: 32px;">mail</span>
+              <div slot="decorator" style="background: #34c759; width: 8px; height: 8px;"></div>
+            </icon-decorator>
+          </div>
+          <div class="label">Small (30%)</div>
+        </div>
+
+        <div class="variant-card">
+          <div class="preview">
+            <icon-decorator position="bottom-right" size-ratio="0.5" cutout-border="1.5px" offset="2px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #667eea; font-size: 48px;">mail</span>
+              <div slot="decorator" style="background: #34c759; width: 12px; height: 12px;"></div>
+            </icon-decorator>
+          </div>
+          <div class="label">Medium (50%)</div>
+        </div>
+
+        <div class="variant-card">
+          <div class="preview">
+            <icon-decorator position="bottom-right" size-ratio="0.7" cutout-border="2px" offset="3px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #667eea; font-size: 64px;">mail</span>
+              <div slot="decorator" style="background: #34c759; width: 18px; height: 18px;"></div>
+            </icon-decorator>
+          </div>
+          <div class="label">Large (70%)</div>
+        </div>
+
+        <div class="variant-card">
+          <div class="preview">
+            <icon-decorator position="bottom-right" size-ratio="0.9" cutout-border="2.5px" offset="4px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #667eea; font-size: 80px;">mail</span>
+              <div slot="decorator" style="background: #34c759; width: 24px; height: 24px;"></div>
+            </icon-decorator>
+          </div>
+          <div class="label">Extra Large (90%)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Decorator Styles -->
+    <div class="section">
+      <div class="section-title">Decorator Styles</div>
+      <div class="variants-grid">
+        <div class="variant-card">
+          <div class="preview">
+            <icon-decorator position="bottom-right" size-ratio="0.5" cutout-border="2px" offset="3px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">notifications</span>
+              <div slot="decorator" style="background: #ff3b30; width: 18px; height: 18px; border-radius: 50%; color: white; font-size: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold;">3</div>
+            </icon-decorator>
+          </div>
+          <div class="label">Badge Count</div>
+        </div>
+
+        <div class="variant-card">
+          <div class="preview">
+            <icon-decorator position="top-right" size-ratio="0.5" cutout-border="2px" offset="3px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">person</span>
+              <div slot="decorator" style="background: #34c759; width: 18px; height: 18px; border-radius: 50%;"></div>
+            </icon-decorator>
+          </div>
+          <div class="label">Status Dot</div>
+        </div>
+
+        <div class="variant-card">
+          <div class="preview">
+            <icon-decorator position="bottom-right" size-ratio="0.5" cutout-border="2px" offset="3px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">settings</span>
+              <div slot="decorator" style="background: #007aff; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <span class="material-symbols-outlined" style="font-size: 12px; color: white;">add</span>
+              </div>
+            </icon-decorator>
+          </div>
+          <div class="label">Icon Badge</div>
+        </div>
+
+        <div class="variant-card">
+          <div class="preview">
+            <icon-decorator position="bottom-right" size-ratio="0.5" cutout-border="2px" offset="3px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">star</span>
+              <div slot="decorator" style="background: linear-gradient(135deg, #ff9500 0%, #ff3b30 100%); width: 18px; height: 18px; border-radius: 50%;"></div>
+            </icon-decorator>
+          </div>
+          <div class="label">Gradient Badge</div>
+        </div>
+
+        <div class="variant-card">
+          <div class="preview">
+            <icon-decorator position="bottom-right" size-ratio="0.5" cutout-border="2px" offset="3px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">favorite</span>
+              <div slot="decorator" style="border: 2px solid #ff3b30; width: 16px; height: 16px; border-radius: 50%; background: transparent;"></div>
+            </icon-decorator>
+          </div>
+          <div class="label">Outline Badge</div>
+        </div>
+
+        <div class="variant-card">
+          <div class="preview">
+            <icon-decorator position="bottom-right" size-ratio="0.5" cutout-border="2px" offset="3px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">package_2</span>
+              <div slot="decorator" style="width: 18px; height: 18px; border-radius: 50%;"></div>
+            </icon-decorator>
+          </div>
+          <div class="label">No Background</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Playground -->
+    <div class="section">
+      <div class="section-title">Interactive Playground</div>
+      <div class="playground">
+        <div class="playground-preview">
+          <icon-decorator 
+            id="playgroundIcon"
+            position="bottom-right" 
+            size-ratio="0.5" 
+            cutout-border="2px" 
+            offset="3px">
+            <span slot="icon" id="playgroundIcon-icon" class="material-symbols-outlined" style="color: #667eea;">shopping_cart</span>
+            <div id="playgroundDecorator" slot="decorator" style="background: #ff3b30; width: 24px; height: 24px; border-radius: 50%; color: white; font-size: 12px; display: flex; align-items: center; justify-content: center; font-weight: bold;">5</div>
+          </icon-decorator>
+        </div>
+
+        <div class="playground-controls">
+          <!-- Position -->
+          <div class="control-group">
+            <label>Position</label>
+            <div class="position-grid">
+              <button class="position-btn" data-position="top-left">Top Left</button>
+              <button class="position-btn" data-position="top-right">Top Right</button>
+              <button class="position-btn" data-position="bottom-left">Bottom Left</button>
+              <button class="position-btn active" data-position="bottom-right">Bottom Right</button>
+            </div>
+          </div>
+
+          <!-- Size Ratio -->
+          <div class="control-group">
+            <label>
+              Size Ratio
+              <span class="value-display" id="sizeRatioValue">0.5</span>
+            </label>
+            <input type="range" id="sizeRatioSlider" min="0.2" max="0.9" step="0.1" value="0.5">
+          </div>
+
+          <!-- Cutout Border -->
+          <div class="control-group">
+            <label>
+              Cutout Border
+              <span class="value-display" id="cutoutBorderValue">2px</span>
+            </label>
+            <input type="range" id="cutoutBorderSlider" min="0" max="5" step="0.5" value="2">
+          </div>
+
+          <!-- Offset -->
+          <div class="control-group">
+            <label>
+              Offset
+              <span class="value-display" id="offsetValue">3px</span>
+            </label>
+            <input type="range" id="offsetSlider" min="0" max="10" step="1" value="3">
+          </div>
+
+          <!-- Icon Selector -->
+          <div class="selector-group">
+            <div class="selector-title">Icon</div>
+            <div class="icon-selector">
+              <button class="icon-option active" data-icon="shopping_cart">🛒</button>
+              <button class="icon-option" data-icon="notifications">🔔</button>
+              <button class="icon-option" data-icon="mail">✉️</button>
+              <button class="icon-option" data-icon="person">👤</button>
+              <button class="icon-option" data-icon="star">⭐</button>
+              <button class="icon-option" data-icon="settings">⚙️</button>
+              <button class="icon-option" data-icon="favorite">❤️</button>
+              <button class="icon-option" data-icon="check_circle">✓</button>
+              <button class="icon-option" data-icon="info">ℹ️</button>
+              <button class="icon-option" data-icon="warning">⚠️</button>
+            </div>
+          </div>
+
+          <!-- Decorator Color -->
+          <div class="control-group">
+            <label>Decorator Color</label>
+            <input type="color" id="decoratorColor" value="#ff3b30">
+            <div class="preset-colors">
+              <button class="preset-btn" data-color="#ff3b30"><span class="color-swatch" style="background: #ff3b30;"></span>Error</button>
+              <button class="preset-btn" data-color="#34c759"><span class="color-swatch" style="background: #34c759;"></span>Success</button>
+              <button class="preset-btn" data-color="#007aff"><span class="color-swatch" style="background: #007aff;"></span>Info</button>
+              <button class="preset-btn" data-color="#ff9500"><span class="color-swatch" style="background: #ff9500;"></span>Warn</button>
+            </div>
+          </div>
+
+          <!-- Icon Color -->
+          <div class="control-group">
+            <label>Icon Color</label>
+            <input type="color" id="iconColor" value="#667eea">
+            <div class="preset-colors">
+              <button class="preset-btn" data-icon-color="#667eea"><span class="color-swatch" style="background: #667eea;"></span>Purple</button>
+              <button class="preset-btn" data-icon-color="#1c1e21"><span class="color-swatch" style="background: #1c1e21;"></span>Dark</button>
+              <button class="preset-btn" data-icon-color="#34c759"><span class="color-swatch" style="background: #34c759;"></span>Green</button>
+              <button class="preset-btn" data-icon-color="#007aff"><span class="color-swatch" style="background: #007aff;"></span>Blue</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Use Cases -->
+    <div class="section">
+      <div class="section-title">Real-World Use Cases</div>
+      <div class="use-cases-grid">
+        <div class="use-case-card">
+          <div class="use-case-title">Notifications</div>
+          <div class="use-case-demo">
+            <icon-decorator position="top-right" size-ratio="0.5" cutout-border="1.5px" offset="2px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #333; font-size: 40px;">notifications</span>
+              <div slot="decorator" style="background: #ff3b30; width: 16px; height: 16px; border-radius: 50%; color: white; font-size: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold;">9</div>
+            </icon-decorator>
+          </div>
+          <div class="use-case-description">Show unread notification count with a red badge</div>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-title">User Status</div>
+          <div class="use-case-demo">
+            <icon-decorator position="bottom-right" size-ratio="0.4" cutout-border="1px" offset="2px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #333; font-size: 48px;">person</span>
+              <div slot="decorator" style="background: #34c759; width: 14px; height: 14px; border-radius: 50%;"></div>
+            </icon-decorator>
+          </div>
+          <div class="use-case-description">Indicate online/offline status with a green dot</div>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-title">Action Required</div>
+          <div class="use-case-demo">
+            <icon-decorator position="bottom-right" size-ratio="0.45" cutout-border="1.5px" offset="2px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #333; font-size: 44px;">drafts</span>
+              <div slot="decorator" style="background: #007aff; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <span class="material-symbols-outlined" style="font-size: 11px; color: white;">edit</span>
+              </div>
+            </icon-decorator>
+          </div>
+          <div class="use-case-description">Show action icons on top of main icon</div>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-title">Message Badge</div>
+          <div class="use-case-demo">
+            <icon-decorator position="top-right" size-ratio="0.48" cutout-border="1.5px" offset="2px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #333; font-size: 40px;">mail</span>
+              <div slot="decorator" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 18px; height: 18px; border-radius: 50%; color: white; font-size: 11px; display: flex; align-items: center; justify-content: center; font-weight: bold;">N</div>
+            </icon-decorator>
+          </div>
+          <div class="use-case-description">Display gradient badge with custom content</div>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-title">Achievement Badge</div>
+          <div class="use-case-demo">
+            <icon-decorator position="bottom-right" size-ratio="0.5" cutout-border="2px" offset="3px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #FFD700; font-size: 48px;">star</span>
+              <div slot="decorator" style="background: #FFD700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <span class="material-symbols-outlined" style="font-size: 12px; color: white;">check</span>
+              </div>
+            </icon-decorator>
+          </div>
+          <div class="use-case-description">Highlight achievements with special badges</div>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-title">Upload Progress</div>
+          <div class="use-case-demo">
+            <icon-decorator position="bottom-right" size-ratio="0.45" cutout-border="1.5px" offset="2px">
+              <span slot="icon" class="material-symbols-outlined" style="color: #333; font-size: 44px;">cloud_upload</span>
+              <div slot="decorator" style="background: #34c759; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <span class="material-symbols-outlined" style="font-size: 10px; color: white;">check</span>
+              </div>
+            </icon-decorator>
+          </div>
+          <div class="use-case-description">Show upload status with checkmark</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Playground functionality
+    const playgroundIcon = document.getElementById('playgroundIcon');
+    const iconElement = document.getElementById('playgroundIcon-icon');
+    const positionButtons = document.querySelectorAll('.position-btn');
+    const iconOptions = document.querySelectorAll('.icon-option');
+    const sizeRatioSlider = document.getElementById('sizeRatioSlider');
+    const cutoutBorderSlider = document.getElementById('cutoutBorderSlider');
+    const offsetSlider = document.getElementById('offsetSlider');
+    const decoratorColorInput = document.getElementById('decoratorColor');
+    const iconColorInput = document.getElementById('iconColor');
+    const decoratorPresets = document.querySelectorAll('.preset-btn[data-color]');
+    const iconPresets = document.querySelectorAll('.preset-btn[data-icon-color]');
+
+    // Position buttons
+    positionButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        positionButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        playgroundIcon.setAttribute('position', btn.dataset.position);
+      });
+    });
+
+    // Icon selector
+    iconOptions.forEach(btn => {
+      btn.addEventListener('click', () => {
+        iconOptions.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        iconElement.textContent = btn.textContent;
+        iconElement.setAttribute('class', 'material-symbols-outlined');
+      });
+    });
+
+    // Size ratio
+    sizeRatioSlider.addEventListener('input', (e) => {
+      playgroundIcon.setAttribute('size-ratio', e.target.value);
+      document.getElementById('sizeRatioValue').textContent = parseFloat(e.target.value).toFixed(1);
+    });
+
+    // Cutout border
+    cutoutBorderSlider.addEventListener('input', (e) => {
+      playgroundIcon.setAttribute('cutout-border', e.target.value + 'px');
+      document.getElementById('cutoutBorderValue').textContent = e.target.value + 'px';
+    });
+
+    // Offset
+    offsetSlider.addEventListener('input', (e) => {
+      playgroundIcon.setAttribute('offset', e.target.value + 'px');
+      document.getElementById('offsetValue').textContent = e.target.value + 'px';
+    });
+
+    // Decorator color
+    decoratorColorInput.addEventListener('input', (e) => {
+      const decorator = document.getElementById('playgroundDecorator');
+      decorator.style.background = e.target.value;
+    });
+
+    // Decorator color presets
+    decoratorPresets.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const color = btn.dataset.color;
+        decoratorColorInput.value = color;
+        const decorator = document.getElementById('playgroundDecorator');
+        decorator.style.background = color;
+      });
+    });
+
+    // Icon color
+    iconColorInput.addEventListener('input', (e) => {
+      iconElement.style.color = e.target.value;
+    });
+
+    // Icon color presets
+    iconPresets.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const color = btn.dataset.iconColor;
+        iconColorInput.value = color;
+        iconElement.style.color = color;
+      });
+    });
+  </script>
+</body>
+</html>
