@@ -628,7 +628,7 @@
           <!-- Icon Selector -->
           <div class="selector-group">
             <div class="selector-title">Icon</div>
-            <div class="icon-selector">
+            <div id="mainIconSelector" class="icon-selector">
               <button class="icon-option active" data-icon="shopping_cart">🛒</button>
               <button class="icon-option" data-icon="notifications">🔔</button>
               <button class="icon-option" data-icon="mail">✉️</button>
@@ -754,7 +754,7 @@
     const playgroundIcon = document.getElementById('playgroundIcon');
     const iconElement = document.getElementById('playgroundIcon-icon');
     const positionButtons = document.querySelectorAll('.position-btn');
-    const iconOptions = document.querySelectorAll('.icon-option');
+    const iconOptions = document.querySelectorAll('#mainIconSelector .icon-option');
     const sizeRatioSlider = document.getElementById('sizeRatioSlider');
     const cutoutBorderSlider = document.getElementById('cutoutBorderSlider');
     const offsetSlider = document.getElementById('offsetSlider');
