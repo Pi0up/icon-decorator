@@ -5,7 +5,7 @@
   "main": "icon-decorator.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "live-server"
+    "start": "live-server --open=demo.html"
   },
   "repository": {
     "type": "git",

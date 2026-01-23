@@ -628,7 +628,7 @@
           <!-- Icon Selector -->
           <div class="selector-group">
             <div class="selector-title">Icon</div>
-            <div id="mainIconSelector" class="icon-selector">
+            <div class="icon-selector" id="mainIconSelector">
               <button class="icon-option active" data-icon="shopping_cart">
                 <span class="material-symbols-outlined">shopping_cart</span>
               </button>
@@ -796,7 +796,8 @@
     const playgroundIcon = document.getElementById('playgroundIcon');
     const iconElement = document.getElementById('playgroundIcon-icon');
     const positionButtons = document.querySelectorAll('.position-btn');
-    const iconOptions = document.querySelectorAll('#mainIconSelector .icon-option');
+    const mainIconSelector = document.getElementById('mainIconSelector');
+    const iconOptions = mainIconSelector.querySelectorAll('.icon-option');
     const sizeRatioSlider = document.getElementById('sizeRatioSlider');
     const cutoutBorderSlider = document.getElementById('cutoutBorderSlider');
     const offsetSlider = document.getElementById('offsetSlider');
