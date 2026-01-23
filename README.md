@@ -9,7 +9,7 @@ The Icon Decorator is a lightweight, dependency-free Web Component designed to o
 Include the script and use the component with slots:
 
 ```html
-<script src="script.js"></script>
+<script src="icon-decorator.js"></script>
 
 <icon-decorator position="bottom-right" offset="3px" size-ratio="0.5" cutout-border="2px">
   <span slot="icon" class="material-symbols-outlined">mail</span>
