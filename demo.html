@@ -629,16 +629,58 @@
           <div class="selector-group">
             <div class="selector-title">Icon</div>
             <div id="mainIconSelector" class="icon-selector">
-              <button class="icon-option active" data-icon="shopping_cart">🛒</button>
-              <button class="icon-option" data-icon="notifications">🔔</button>
-              <button class="icon-option" data-icon="mail">✉️</button>
-              <button class="icon-option" data-icon="person">👤</button>
-              <button class="icon-option" data-icon="star">⭐</button>
-              <button class="icon-option" data-icon="settings">⚙️</button>
-              <button class="icon-option" data-icon="favorite">❤️</button>
-              <button class="icon-option" data-icon="check_circle">✓</button>
-              <button class="icon-option" data-icon="info">ℹ️</button>
-              <button class="icon-option" data-icon="warning">⚠️</button>
+              <button class="icon-option active" data-icon="shopping_cart">
+                <span class="material-symbols-outlined">shopping_cart</span>
+              </button>
+              <button class="icon-option" data-icon="notifications">
+                <span class="material-symbols-outlined">notifications</span>
+              </button>
+              <button class="icon-option" data-icon="mail">
+                <span class="material-symbols-outlined">mail</span>
+              </button>
+              <button class="icon-option" data-icon="person">
+                <span class="material-symbols-outlined">person</span>
+              </button>
+              <button class="icon-option" data-icon="star">
+                <span class="material-symbols-outlined">star</span>
+              </button>
+              <button class="icon-option" data-icon="settings">
+                <span class="material-symbols-outlined">settings</span>
+              </button>
+              <button class="icon-option" data-icon="favorite">
+                <span class="material-symbols-outlined">favorite</span>
+              </button>
+              <button class="icon-option" data-icon="check_circle">
+                <span class="material-symbols-outlined">check_circle</span>
+              </button>
+              <button class="icon-option" data-icon="info">
+                <span class="material-symbols-outlined">info</span>
+              </button>
+              <button class="icon-option" data-icon="warning">
+                <span class="material-symbols-outlined">warning</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Badge Icon Selector -->
+          <div class="selector-group">
+            <div class="selector-title">Badge Icon</div>
+            <div class="icon-selector" id="badgeIconSelector">
+              <button class="icon-option active" data-icon="add">
+                <span class="material-symbols-outlined">add</span>
+              </button>
+              <button class="icon-option" data-icon="edit">
+                <span class="material-symbols-outlined">edit</span>
+              </button>
+              <button class="icon-option" data-icon="check">
+                <span class="material-symbols-outlined">check</span>
+              </button>
+              <button class="icon-option" data-icon="close">
+                <span class="material-symbols-outlined">close</span>
+              </button>
+              <button class="icon-option" data-icon="info">
+                <span class="material-symbols-outlined">info</span>
+              </button>
             </div>
           </div>
 
@@ -762,6 +804,14 @@
     const iconColorInput = document.getElementById('iconColor');
     const decoratorPresets = document.querySelectorAll('.preset-btn[data-color]');
     const iconPresets = document.querySelectorAll('.preset-btn[data-icon-color]');
+    const badgeIconSelector = document.getElementById('badgeIconSelector');
+    const badgeIconElement = document.createElement('span');
+    badgeIconElement.classList.add('material-symbols-outlined');
+    badgeIconElement.id = 'playgroundBadgeIcon';
+
+    const playgroundDecorator = document.getElementById('playgroundDecorator');
+    playgroundDecorator.textContent = ''; // Clear any text content inside the decorator
+    playgroundDecorator.appendChild(badgeIconElement); // Add the badge icon
 
     // Position buttons
     positionButtons.forEach(btn => {
@@ -772,13 +822,27 @@
       });
     });
 
-    // Icon selector
-    iconOptions.forEach(btn => {
+    // Icon selector logic
+    iconOptions.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        iconOptions.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // Récupère la valeur de l'icône définie dans data-icon
+        const iconName = btn.getAttribute("data-icon");
+        iconElement.setAttribute("class", "material-symbols-outlined");
+        iconElement.textContent = iconName;
+      });
+    });
+
+    // Badge icon selector logic
+    badgeIconSelector.querySelectorAll('.icon-option').forEach((btn) => {
       btn.addEventListener('click', () => {
-        iconOptions.forEach(b => b.classList.remove('active'));
+        badgeIconSelector.querySelectorAll('.icon-option').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        iconElement.textContent = btn.textContent;
-        iconElement.setAttribute('class', 'material-symbols-outlined');
+        
+        const badgeIconName = btn.getAttribute('data-icon');
+        badgeIconElement.textContent = badgeIconName;
       });
     });
 
