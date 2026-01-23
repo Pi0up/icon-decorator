@@ -383,7 +383,7 @@
     }
 
     .playground-preview icon-decorator {
-      --icon-size: 120px;
+      --icon-size: 48px;
     }
 
     /* Responsive */
@@ -607,6 +607,15 @@
             <input type="range" id="sizeRatioSlider" min="0.2" max="0.9" step="0.1" value="0.5">
           </div>
 
+          <!-- Icon Size -->
+          <div class="control-group">
+            <label>
+              Icon Size
+              <span class="value-display" id="iconSizeValue">48px</span>
+            </label>
+            <input type="range" id="iconSizeSlider" min="16" max="64" step="4" value="48">
+          </div>
+
           <!-- Cutout Border -->
           <div class="control-group">
             <label>
@@ -799,6 +808,7 @@
     const mainIconSelector = document.getElementById('mainIconSelector');
     const iconOptions = mainIconSelector.querySelectorAll('.icon-option');
     const sizeRatioSlider = document.getElementById('sizeRatioSlider');
+    const iconSizeSlider = document.getElementById('iconSizeSlider');
     const cutoutBorderSlider = document.getElementById('cutoutBorderSlider');
     const offsetSlider = document.getElementById('offsetSlider');
     const decoratorColorInput = document.getElementById('decoratorColor');
@@ -851,6 +861,13 @@
     sizeRatioSlider.addEventListener('input', (e) => {
       playgroundIcon.setAttribute('size-ratio', e.target.value);
       document.getElementById('sizeRatioValue').textContent = parseFloat(e.target.value).toFixed(1);
+    });
+
+    // Icon size
+    iconSizeSlider.addEventListener('input', (e) => {
+      const size = e.target.value + 'px';
+      playgroundIcon.style.setProperty('--icon-size', size);
+      document.getElementById('iconSizeValue').textContent = size;
     });
 
     // Cutout border
