@@ -383,7 +383,7 @@
     }
 
     .playground-preview icon-decorator {
-      --icon-size: 48px;
+      --icon-size: 24px;
     }
 
     /* Responsive */
@@ -580,7 +580,7 @@
             position="bottom-right" 
             size-ratio="0.5" 
             cutout-border="2px" 
-            offset="3px">
+            offset="8px">
             <span slot="icon" id="playgroundIcon-icon" class="material-symbols-outlined" style="color: #667eea;">shopping_cart</span>
             <div id="playgroundDecorator" slot="decorator" style="background: #ff3b30; width: 24px; height: 24px; border-radius: 50%; color: white; font-size: 12px; display: flex; align-items: center; justify-content: center; font-weight: bold;">5</div>
           </icon-decorator>
@@ -611,9 +611,9 @@
           <div class="control-group">
             <label>
               Icon Size
-              <span class="value-display" id="iconSizeValue">48px</span>
+              <span class="value-display" id="iconSizeValue">24px</span>
             </label>
-            <input type="range" id="iconSizeSlider" min="16" max="64" step="4" value="48">
+            <input type="range" id="iconSizeSlider" min="16" max="64" step="4" value="24">
           </div>
 
           <!-- Cutout Border -->
@@ -629,9 +629,9 @@
           <div class="control-group">
             <label>
               Offset
-              <span class="value-display" id="offsetValue">3px</span>
+              <span class="value-display" id="offsetValue">8px</span>
             </label>
-            <input type="range" id="offsetSlider" min="0" max="10" step="1" value="3">
+            <input type="range" id="offsetSlider" min="0" max="10" step="1" value="8">
           </div>
 
           <!-- Icon Selector -->
@@ -824,6 +824,11 @@
     playgroundDecorator.textContent = ''; // Clear any text content inside the decorator
     playgroundDecorator.appendChild(badgeIconElement); // Add the badge icon
 
+    // Initialize icon size
+    const initialIconSize = iconSizeSlider.value + 'px';
+    playgroundIcon.style.setProperty('--icon-size', initialIconSize);
+    iconElement.style.fontSize = initialIconSize;
+
     // Position buttons
     positionButtons.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -867,6 +872,7 @@
     iconSizeSlider.addEventListener('input', (e) => {
       const size = e.target.value + 'px';
       playgroundIcon.style.setProperty('--icon-size', size);
+      iconElement.style.fontSize = size;
       document.getElementById('iconSizeValue').textContent = size;
     });
 
