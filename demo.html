@@ -383,7 +383,7 @@
     }
 
     .playground-preview icon-decorator {
-      --icon-size: 120px;
+      --icon-size: 24px;
     }
 
     /* Responsive */
@@ -580,7 +580,7 @@
             position="bottom-right" 
             size-ratio="0.5" 
             cutout-border="2px" 
-            offset="3px">
+            offset="8px">
             <span slot="icon" id="playgroundIcon-icon" class="material-symbols-outlined" style="color: #667eea;">shopping_cart</span>
             <div id="playgroundDecorator" slot="decorator" style="background: #ff3b30; width: 24px; height: 24px; border-radius: 50%; color: white; font-size: 12px; display: flex; align-items: center; justify-content: center; font-weight: bold;">5</div>
           </icon-decorator>
@@ -607,6 +607,15 @@
             <input type="range" id="sizeRatioSlider" min="0.2" max="0.9" step="0.1" value="0.5">
           </div>
 
+          <!-- Icon Size -->
+          <div class="control-group">
+            <label>
+              Icon Size
+              <span class="value-display" id="iconSizeValue">24px</span>
+            </label>
+            <input type="range" id="iconSizeSlider" min="16" max="64" step="4" value="24">
+          </div>
+
           <!-- Cutout Border -->
           <div class="control-group">
             <label>
@@ -620,15 +629,15 @@
           <div class="control-group">
             <label>
               Offset
-              <span class="value-display" id="offsetValue">3px</span>
+              <span class="value-display" id="offsetValue">8px</span>
             </label>
-            <input type="range" id="offsetSlider" min="0" max="10" step="1" value="3">
+            <input type="range" id="offsetSlider" min="0" max="10" step="1" value="8">
           </div>
 
           <!-- Icon Selector -->
           <div class="selector-group">
             <div class="selector-title">Icon</div>
-            <div id="mainIconSelector" class="icon-selector">
+            <div class="icon-selector" id="mainIconSelector">
               <button class="icon-option active" data-icon="shopping_cart">
                 <span class="material-symbols-outlined">shopping_cart</span>
               </button>
@@ -710,84 +719,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Use Cases -->
-    <div class="section">
-      <div class="section-title">Real-World Use Cases</div>
-      <div class="use-cases-grid">
-        <div class="use-case-card">
-          <div class="use-case-title">Notifications</div>
-          <div class="use-case-demo">
-            <icon-decorator position="top-right" size-ratio="0.5" cutout-border="1.5px" offset="2px">
-              <span slot="icon" class="material-symbols-outlined" style="color: #333; font-size: 40px;">notifications</span>
-              <div slot="decorator" style="background: #ff3b30; width: 16px; height: 16px; border-radius: 50%; color: white; font-size: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold;">9</div>
-            </icon-decorator>
-          </div>
-          <div class="use-case-description">Show unread notification count with a red badge</div>
-        </div>
-
-        <div class="use-case-card">
-          <div class="use-case-title">User Status</div>
-          <div class="use-case-demo">
-            <icon-decorator position="bottom-right" size-ratio="0.4" cutout-border="1px" offset="2px">
-              <span slot="icon" class="material-symbols-outlined" style="color: #333; font-size: 48px;">person</span>
-              <div slot="decorator" style="background: #34c759; width: 14px; height: 14px; border-radius: 50%;"></div>
-            </icon-decorator>
-          </div>
-          <div class="use-case-description">Indicate online/offline status with a green dot</div>
-        </div>
-
-        <div class="use-case-card">
-          <div class="use-case-title">Action Required</div>
-          <div class="use-case-demo">
-            <icon-decorator position="bottom-right" size-ratio="0.45" cutout-border="1.5px" offset="2px">
-              <span slot="icon" class="material-symbols-outlined" style="color: #333; font-size: 44px;">drafts</span>
-              <div slot="decorator" style="background: #007aff; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <span class="material-symbols-outlined" style="font-size: 11px; color: white;">edit</span>
-              </div>
-            </icon-decorator>
-          </div>
-          <div class="use-case-description">Show action icons on top of main icon</div>
-        </div>
-
-        <div class="use-case-card">
-          <div class="use-case-title">Message Badge</div>
-          <div class="use-case-demo">
-            <icon-decorator position="top-right" size-ratio="0.48" cutout-border="1.5px" offset="2px">
-              <span slot="icon" class="material-symbols-outlined" style="color: #333; font-size: 40px;">mail</span>
-              <div slot="decorator" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 18px; height: 18px; border-radius: 50%; color: white; font-size: 11px; display: flex; align-items: center; justify-content: center; font-weight: bold;">N</div>
-            </icon-decorator>
-          </div>
-          <div class="use-case-description">Display gradient badge with custom content</div>
-        </div>
-
-        <div class="use-case-card">
-          <div class="use-case-title">Achievement Badge</div>
-          <div class="use-case-demo">
-            <icon-decorator position="bottom-right" size-ratio="0.5" cutout-border="2px" offset="3px">
-              <span slot="icon" class="material-symbols-outlined" style="color: #FFD700; font-size: 48px;">star</span>
-              <div slot="decorator" style="background: #FFD700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <span class="material-symbols-outlined" style="font-size: 12px; color: white;">check</span>
-              </div>
-            </icon-decorator>
-          </div>
-          <div class="use-case-description">Highlight achievements with special badges</div>
-        </div>
-
-        <div class="use-case-card">
-          <div class="use-case-title">Upload Progress</div>
-          <div class="use-case-demo">
-            <icon-decorator position="bottom-right" size-ratio="0.45" cutout-border="1.5px" offset="2px">
-              <span slot="icon" class="material-symbols-outlined" style="color: #333; font-size: 44px;">cloud_upload</span>
-              <div slot="decorator" style="background: #34c759; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <span class="material-symbols-outlined" style="font-size: 10px; color: white;">check</span>
-              </div>
-            </icon-decorator>
-          </div>
-          <div class="use-case-description">Show upload status with checkmark</div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <script src="icon-decorator.js"></script>
@@ -796,8 +727,10 @@
     const playgroundIcon = document.getElementById('playgroundIcon');
     const iconElement = document.getElementById('playgroundIcon-icon');
     const positionButtons = document.querySelectorAll('.position-btn');
-    const iconOptions = document.querySelectorAll('#mainIconSelector .icon-option');
+    const mainIconSelector = document.getElementById('mainIconSelector');
+    const iconOptions = mainIconSelector.querySelectorAll('.icon-option');
     const sizeRatioSlider = document.getElementById('sizeRatioSlider');
+    const iconSizeSlider = document.getElementById('iconSizeSlider');
     const cutoutBorderSlider = document.getElementById('cutoutBorderSlider');
     const offsetSlider = document.getElementById('offsetSlider');
     const decoratorColorInput = document.getElementById('decoratorColor');
@@ -812,6 +745,11 @@
     const playgroundDecorator = document.getElementById('playgroundDecorator');
     playgroundDecorator.textContent = ''; // Clear any text content inside the decorator
     playgroundDecorator.appendChild(badgeIconElement); // Add the badge icon
+
+    // Initialize icon size
+    const initialIconSize = iconSizeSlider.value + 'px';
+    playgroundIcon.style.setProperty('--icon-size', initialIconSize);
+    iconElement.style.fontSize = initialIconSize;
 
     // Position buttons
     positionButtons.forEach(btn => {
@@ -850,6 +788,14 @@
     sizeRatioSlider.addEventListener('input', (e) => {
       playgroundIcon.setAttribute('size-ratio', e.target.value);
       document.getElementById('sizeRatioValue').textContent = parseFloat(e.target.value).toFixed(1);
+    });
+
+    // Icon size
+    iconSizeSlider.addEventListener('input', (e) => {
+      const size = e.target.value + 'px';
+      playgroundIcon.style.setProperty('--icon-size', size);
+      iconElement.style.fontSize = size;
+      document.getElementById('iconSizeValue').textContent = size;
     });
 
     // Cutout border

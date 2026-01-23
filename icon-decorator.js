@@ -84,12 +84,12 @@ class IconDecorator extends HTMLElement {
           --hole-radius: calc( (var(--badge-width) * var(--scale) / 2) + var(--cutout-border) );
           
           -webkit-mask-image: radial-gradient(
-            circle var(--hole-radius) at var(--mask-origin), 
+            circle var(--hole-radius) at var(--mask-origin-x) var(--mask-origin-y), 
             transparent var(--hole-radius), 
             black calc(var(--hole-radius) + 0.5px)
           );
           mask-image: radial-gradient(
-            circle var(--hole-radius) at var(--mask-origin), 
+            circle var(--hole-radius) at var(--mask-origin-x) var(--mask-origin-y), 
             transparent var(--hole-radius), 
             black calc(var(--hole-radius) + 0.5px)
           );
@@ -97,10 +97,10 @@ class IconDecorator extends HTMLElement {
           mask-repeat: no-repeat;
         }
 
-        :host([data-inner-pos="top-right"]) #icon-wrapper { --mask-origin: calc(100% + var(--offset)) calc(-1 * var(--offset)); }
-        :host([data-inner-pos="top-left"]) #icon-wrapper { --mask-origin: calc(-1 * var(--offset)) calc(-1 * var(--offset)); }
-        :host([data-inner-pos="bottom-right"]) #icon-wrapper { --mask-origin: calc(100% + var(--offset)) calc(100% + var(--offset)); }
-        :host([data-inner-pos="bottom-left"]) #icon-wrapper { --mask-origin: calc(-1 * var(--offset)) calc(100% + var(--offset)); }
+        :host([data-inner-pos="top-right"]) #icon-wrapper { --mask-origin-x: calc(50% + var(--offset)); --mask-origin-y: calc(50% - var(--offset)); }
+        :host([data-inner-pos="top-left"]) #icon-wrapper { --mask-origin-x: calc(50% - var(--offset)); --mask-origin-y: calc(50% - var(--offset)); }
+        :host([data-inner-pos="bottom-right"]) #icon-wrapper { --mask-origin-x: calc(50% + var(--offset)); --mask-origin-y: calc(50% + var(--offset)); }
+        :host([data-inner-pos="bottom-left"]) #icon-wrapper { --mask-origin-x: calc(50% - var(--offset)); --mask-origin-y: calc(50% + var(--offset)); }
 
         ::slotted([slot="icon"]) {
           display: block;
@@ -119,10 +119,26 @@ class IconDecorator extends HTMLElement {
           min-width: 1px;
         }
 
-        :host([data-inner-pos="top-right"]) .badge-container { top: calc(-1 * var(--offset)); right: calc(-1 * var(--offset)); transform: translate(50%, -50%) scale(var(--scale)); }
-        :host([data-inner-pos="top-left"]) .badge-container { top: calc(-1 * var(--offset)); left: calc(-1 * var(--offset)); transform: translate(-50%, -50%) scale(var(--scale)); }
-        :host([data-inner-pos="bottom-right"]) .badge-container { bottom: calc(-1 * var(--offset)); right: calc(-1 * var(--offset)); transform: translate(50%, 50%) scale(var(--scale)); }
-        :host([data-inner-pos="bottom-left"]) .badge-container { bottom: calc(-1 * var(--offset)); left: calc(-1 * var(--offset)); transform: translate(-50%, 50%) scale(var(--scale)); }
+        :host([data-inner-pos="top-right"]) .badge-container {
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) translate(var(--offset), calc(-1 * var(--offset))) scale(var(--scale));
+        }
+        :host([data-inner-pos="top-left"]) .badge-container {
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) translate(calc(-1 * var(--offset)), calc(-1 * var(--offset))) scale(var(--scale));
+        }
+        :host([data-inner-pos="bottom-right"]) .badge-container {
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) translate(var(--offset), var(--offset)) scale(var(--scale));
+        }
+        :host([data-inner-pos="bottom-left"]) .badge-container {
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) translate(calc(-1 * var(--offset)), var(--offset)) scale(var(--scale));
+        }
 
         ::slotted([slot="decorator"]) {
           display: flex !important;
