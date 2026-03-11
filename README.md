@@ -1,5 +1,6 @@
 # icon-decorator
 The Icon Decorator is a lightweight, dependency-free Web Component designed to overlay badges (decorators) on icons
+[Page demo](https://pi0up.github.io/icon-decorator/demo.html)
 
 ## Files
 - `icon-decorator.js` — Web Component implementation (`<icon-decorator>`).
