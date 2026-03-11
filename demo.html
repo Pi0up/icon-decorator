@@ -410,74 +410,6 @@
       <p>Beautiful decorated icons with customizable badges and notifications</p>
     </div>
 
-    <!-- Decorator Styles -->
-    <div class="section">
-      <div class="section-title">Decorator Styles</div>
-      <div class="variants-grid">
-        <div class="variant-card">
-          <div class="preview">
-            <icon-decorator position="bottom-right" size-ratio="0.5" cutout-border="2px" offset="3px">
-              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">notifications</span>
-              <div slot="decorator" style="background: #ff3b30; width: 18px; height: 18px; border-radius: 50%; color: white; font-size: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold;">3</div>
-            </icon-decorator>
-          </div>
-          <div class="label">Badge Count</div>
-        </div>
-
-        <div class="variant-card">
-          <div class="preview">
-            <icon-decorator position="top-right" size-ratio="0.5" cutout-border="2px" offset="3px">
-              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">person</span>
-              <div slot="decorator" style="background: #34c759; width: 18px; height: 18px; border-radius: 50%;"></div>
-            </icon-decorator>
-          </div>
-          <div class="label">Status Dot</div>
-        </div>
-
-        <div class="variant-card">
-          <div class="preview">
-            <icon-decorator position="bottom-right" size-ratio="0.5" cutout-border="2px" offset="3px">
-              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">settings</span>
-              <div slot="decorator" style="background: #007aff; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <span class="material-symbols-outlined" style="font-size: 12px; color: white;">add</span>
-              </div>
-            </icon-decorator>
-          </div>
-          <div class="label">Icon Badge</div>
-        </div>
-
-        <div class="variant-card">
-          <div class="preview">
-            <icon-decorator position="bottom-right" size-ratio="0.5" cutout-border="2px" offset="3px">
-              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">star</span>
-              <div slot="decorator" style="background: linear-gradient(135deg, #ff9500 0%, #ff3b30 100%); width: 18px; height: 18px; border-radius: 50%;"></div>
-            </icon-decorator>
-          </div>
-          <div class="label">Gradient Badge</div>
-        </div>
-
-        <div class="variant-card">
-          <div class="preview">
-            <icon-decorator position="bottom-right" size-ratio="0.5" cutout-border="2px" offset="3px">
-              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">favorite</span>
-              <div slot="decorator" style="border: 2px solid #ff3b30; width: 16px; height: 16px; border-radius: 50%; background: transparent;"></div>
-            </icon-decorator>
-          </div>
-          <div class="label">Outline Badge</div>
-        </div>
-
-        <div class="variant-card">
-          <div class="preview">
-            <icon-decorator position="bottom-right" size-ratio="0.5" cutout-border="2px" offset="3px">
-              <span slot="icon" class="material-symbols-outlined" style="color: #667eea;">package_2</span>
-              <div slot="decorator" style="width: 18px; height: 18px; border-radius: 50%;"></div>
-            </icon-decorator>
-          </div>
-          <div class="label">No Background</div>
-        </div>
-      </div>
-    </div>
-
     <!-- Interactive Playground -->
     <div class="section">
       <div class="section-title">Interactive Playground</div>
@@ -546,35 +478,11 @@
           <div class="selector-group">
             <div class="selector-title">Icon</div>
             <div class="icon-selector" id="mainIconSelector">
-              <button class="icon-option active" data-icon="shopping_cart">
-                <span class="material-symbols-outlined">shopping_cart</span>
-              </button>
-              <button class="icon-option" data-icon="notifications">
-                <span class="material-symbols-outlined">notifications</span>
-              </button>
               <button class="icon-option" data-icon="mail">
                 <span class="material-symbols-outlined">mail</span>
               </button>
               <button class="icon-option" data-icon="person">
                 <span class="material-symbols-outlined">person</span>
-              </button>
-              <button class="icon-option" data-icon="star">
-                <span class="material-symbols-outlined">star</span>
-              </button>
-              <button class="icon-option" data-icon="settings">
-                <span class="material-symbols-outlined">settings</span>
-              </button>
-              <button class="icon-option" data-icon="favorite">
-                <span class="material-symbols-outlined">favorite</span>
-              </button>
-              <button class="icon-option" data-icon="check_circle">
-                <span class="material-symbols-outlined">check_circle</span>
-              </button>
-              <button class="icon-option" data-icon="info">
-                <span class="material-symbols-outlined">info</span>
-              </button>
-              <button class="icon-option" data-icon="warning">
-                <span class="material-symbols-outlined">warning</span>
               </button>
             </div>
           </div>
@@ -595,9 +503,6 @@
               <button class="icon-option" data-icon="close">
                 <span class="material-symbols-outlined">close</span>
               </button>
-              <button class="icon-option" data-icon="info">
-                <span class="material-symbols-outlined">info</span>
-              </button>
             </div>
           </div>
 
@@ -613,17 +518,6 @@
             </div>
           </div>
 
-          <!-- Icon Color -->
-          <div class="control-group">
-            <label>Icon Color</label>
-            <input type="color" id="iconColor" value="#667eea">
-            <div class="preset-colors">
-              <button class="preset-btn" data-icon-color="#667eea"><span class="color-swatch" style="background: #667eea;"></span>Purple</button>
-              <button class="preset-btn" data-icon-color="#1c1e21"><span class="color-swatch" style="background: #1c1e21;"></span>Dark</button>
-              <button class="preset-btn" data-icon-color="#34c759"><span class="color-swatch" style="background: #34c759;"></span>Green</button>
-              <button class="preset-btn" data-icon-color="#007aff"><span class="color-swatch" style="background: #007aff;"></span>Blue</button>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -732,11 +626,6 @@
         const decorator = document.getElementById('playgroundDecorator');
         decorator.style.background = color;
       });
-    });
-
-    // Icon color
-    iconColorInput.addEventListener('input', (e) => {
-      iconElement.style.color = e.target.value;
     });
 
     // Icon color presets
